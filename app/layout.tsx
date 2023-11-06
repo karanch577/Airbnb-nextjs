@@ -6,8 +6,9 @@ import Navbar from '@/components/navbar/Navbar'
 import RegisterModal from '@/components/modals/RegisterModal'
 import { Toaster } from 'react-hot-toast'
 import LoginModal from '@/components/modals/LoginModal'
-import getCurrentUser from '@/actions/getCurrentUser'
+import getCurrentUser from '@/utils/getCurrentUser'
 import RentModal from '@/components/modals/RentModal'
+import SearchModal from '@/components/modals/SearchModal'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
@@ -31,6 +32,7 @@ export default async  function RootLayout({
         />
         <LoginModal />
         <RegisterModal />
+        <SearchModal />
         <RentModal />
         <div className='pb-20 pt-28'>
           {children}
