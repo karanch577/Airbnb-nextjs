@@ -12,6 +12,7 @@ import SearchModal from '@/components/modals/SearchModal'
 const nunito = Nunito({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://karan-nextjs.vercel.app"),
   title: 'Airbnb clone',
   description: 'Holiday Homes & Apartment Rentals',
 }

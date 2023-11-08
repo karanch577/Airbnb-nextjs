@@ -17,6 +17,9 @@ export async function generateMetadata({ params }: { params: {listingId: string}
           images: [{
               url: listing?.imageSrc as string
           }]
+        },
+        alternates: {
+            canonical: `/listings/${listing?.id}`
         }
       }
   }
