@@ -9,6 +9,8 @@ interface HomeProps {
   searchParams: IListingsParams
 }
 
+//this page is dynamically rendered because we have used searchParams - dynamic function(cookie(), header(), useSearchParams, searchParams) 
+
 export default async function Home({ searchParams }: HomeProps) {
   const listings = await getListings(searchParams)
   const currentUser = await getCurrentUser()
