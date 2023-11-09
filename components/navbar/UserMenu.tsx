@@ -2,7 +2,7 @@
 
 import { AiOutlineMenu } from "react-icons/ai"
 import Avatar from "../Avatar"
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import MenuItem from "./MenuItem";
 import useRegisterModal from "@/hooks/useRegisterModal";
 import useLoginModal from "@/hooks/useLoginModal";
@@ -23,6 +23,8 @@ function UserMenu({ currentUser }: UserMenuProps) {
 
     const router = useRouter()
 
+    const userMenuRef = useRef<HTMLDivElement>(null)
+
     const toggleOpen = useCallback(() => {
         setIsOpen(prev => !prev)
     }, [])
@@ -37,6 +39,21 @@ function UserMenu({ currentUser }: UserMenuProps) {
         rentModal.onOpen()
         
     }, [currentUser, loginModal])
+
+    // hiding the usermenu when clicked on different area other than the usermenu
+
+    useEffect(() => {
+        const handleOutsideClick = (e: MouseEvent) => {
+            if(userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+                setIsOpen(false)
+            }
+        }
+
+        document.addEventListener("mousedown", handleOutsideClick)
+
+        // cleanup function
+        return () => document.removeEventListener("mousedown", handleOutsideClick)
+    }, [])
 
   return (
     <div className="relative">
@@ -60,6 +77,7 @@ function UserMenu({ currentUser }: UserMenuProps) {
 
         {isOpen && (
             <div
+            ref={userMenuRef}
             className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm"
             >
                 <div className="flex flex-col cursor-pointer">
